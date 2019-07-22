@@ -11,7 +11,7 @@ import com.bumptech.glide.Glide
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.visualisation_cell.view.*
 
-class MainAdapter(val data: DataModel) : RecyclerView.Adapter<viewHolder>() {
+class MainAdapter(val data: DataModel) : RecyclerView.Adapter<ViewHolder>() {
 
     val visualisations = data.Visualisations
 
@@ -19,21 +19,23 @@ class MainAdapter(val data: DataModel) : RecyclerView.Adapter<viewHolder>() {
         return visualisations.count()
     }
 
-    override fun onCreateViewHolder(p0: ViewGroup, p1: Int): viewHolder {
+    override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(p0.context)
         val cellForRow = layoutInflater.inflate(R.layout.visualisation_cell, p0, false)
-        return viewHolder(cellForRow)
+        return ViewHolder(cellForRow)
     }
 
 
-    override fun onBindViewHolder(p0: viewHolder, p1: Int) {
+    override fun onBindViewHolder(p0: ViewHolder, p1: Int) {
 
     }
 
-    override fun onBindViewHolder(holder: viewHolder, position: Int, payloads: MutableList<Any>) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int, payloads: MutableList<Any>) {
         super.onBindViewHolder(holder, position, payloads)
 
         holder.itemView.setBackgroundColor(Color.WHITE)
+
+        val selectedVisualisation = visualisations.get(position)
 
         holder.view.titleTextView.text = visualisations[position].name
         holder.view.infoTextView.text = visualisations[position].info
@@ -48,15 +50,26 @@ class MainAdapter(val data: DataModel) : RecyclerView.Adapter<viewHolder>() {
             .load(visualisations[position].imageURL)
             .into(holder.view.VisualisationImageView)
 
+        holder.selectedVisualisation = selectedVisualisation
+
 
     }
 }
 
-class viewHolder(val view: View) : RecyclerView.ViewHolder(view) {
+class ViewHolder(val view: View, var selectedVisualisation: Visualisation? = null) : RecyclerView.ViewHolder(view) {
+
+    companion object {
+        val SelectedVisualisationTitle = "SelectedVisualisationTitle"
+        val SelectedVisualisationWebURL = "SelectedVisualisationWebURL"
+    }
 
     init {
         view.setOnClickListener {
             val intent = Intent(view.context, VisualisationDetailActivity::class.java)
+
+            intent.putExtra(SelectedVisualisationTitle, selectedVisualisation?.name)
+            intent.putExtra(SelectedVisualisationWebURL, selectedVisualisation?.url_name)
+
             view.context.startActivity(intent)
         }
 
