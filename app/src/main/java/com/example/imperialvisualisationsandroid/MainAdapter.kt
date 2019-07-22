@@ -73,10 +73,10 @@ class ViewHolder(val view: View, var selectedVisualisation: Visualisation? = nul
             view.context.startActivity(intent)
         }
 
-//        view.setOnLongClickListener {
-//            val intent = Intent(view.context, GIFDetailActivity::class.java)
-//            view.context.startActivity(intent)
-//        }
+        view.setOnLongClickListener {
+            val intent = Intent(view.context, GIFDetailActivity::class.java)
+            view.context.startActivity(intent)
+        }
     }
 
 }
