@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Visualisations</string>
+    <string name="app_name">ImpVis</string>
     <string name="search_title">Searching</string>
     <string name="search_hint">Search Visualisations...</string>
 </resources>

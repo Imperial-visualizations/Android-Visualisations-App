@@ -1,5 +1,6 @@
 package com.example.imperialvisualisationsandroid
 
+import android.app.ActionBar
 import android.app.SearchManager
 import android.content.Context
 import android.support.v7.app.AppCompatActivity
@@ -26,6 +27,8 @@ public class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        setTitle("Visualisations")
 
         setContentView(R.layout.activity_main)
 
